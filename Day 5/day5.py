@@ -2,10 +2,17 @@ class StackSet:
   def __init__(self, stacks):
     self.stacks = stacks
     
-  def move(self, number, source, dest):
-    for i in range(0, number):
-      box = self.stacks[source - 1].pop()
-      self.stacks[dest - 1].append(box)
+  def move(self, number, source, dest, all_at_once):
+    if all_at_once == False:
+      for i in range(0, number):
+        box = self.stacks[source - 1].pop()
+        self.stacks[dest - 1].append(box)
+    else:
+      to_move = self.stacks[source-1][number * -1:]
+      for i in range(0, number):
+        self.stacks[source - 1].pop()
+      self.stacks[dest - 1].extend(to_move)
+
 
 
 def cleanInput(filename):
@@ -36,7 +43,7 @@ for line in lines:
   number = int(line[1])
   source = int(line[3])
   dest = int(line[5])
-  stack_set.move(number, source, dest)
+  stack_set.move(number, source, dest, True)
   print(f"moved {number} from {source} to {dest}")
   # print(stack_set.stacks[5])
 
