@@ -5,14 +5,14 @@ def cleanInput(filename):
 
 data = cleanInput("Day 6/input.txt")
 
-recent = data[0:4]
+recent = data[0:14]
 
-for i in range(4, len(data)):
+for i in range(14, len(data)):
   recent = recent[1:]
   recent += data[i]
 
   recent_set = set(recent)
-  if len(recent_set) == 4:
+  if len(recent_set) == 14:
     print(i + 1)
     break
 
