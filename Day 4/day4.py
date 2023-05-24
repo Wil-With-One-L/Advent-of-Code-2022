@@ -16,16 +16,9 @@ for line in lines:
   start2 = int(line[1][0])
   end2 = int(line[1][1])
 
-  # 1 within 2:
-  if start1 >= start2 and end1 <= end2:
-    if start1 <= end2 and end1 >= start2:
-      count += 1
-      # print(f"{line} == 1 in 2")
-
-  # 2 within 1:
-  elif start2 >= start1 and end2 <= end1:
-    if start2 <= end1 and end2 >= start1:
-      count += 1
-      # print(line)
+  if start2 >= start1 and start2 <= end1:
+    count += 1
+  elif start1 >= start2 and start1 <= end2:
+    count += 1
 
 print(count)
