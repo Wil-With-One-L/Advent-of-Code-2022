@@ -7,51 +7,63 @@ def cleanInput(filename):
 
 lines = cleanInput("Day 8/input.txt")
 grid = [] # grid[row][col]
-seen = []
 for line in lines:
-  seen_row = []
   row = []
   for c in line:
     row.append(int(c))
-    seen_row.append(0)
   grid.append(row)
-  seen.append(seen_row)
 
-# left -> right
-for row in range(0, len(grid)):
-  curr_highest = -1
-  for col in range(0, len(grid[row])):
-    if grid[row][col] > curr_highest:
-      curr_highest = grid[row][col]
-      seen[row][col] = 1
+max_score = 0
+# iterate through each cell (ignore ones on the edges, they will have a score of 0)
+for cell_y in range(1, len(grid) - 1):
+  for cell_x in range(1, len(grid[cell_y]) - 1):
+    # print('new')
 
-# top -> bottom
-for col in range(0, len(grid[0])):
-  curr_highest = -1
-  for row in range(0, len(grid)):
-    if grid[row][col] > curr_highest:
-      curr_highest = grid[row][col]
-      seen[row][col] = 1
+    start_height = grid[cell_y][cell_x]
+    # print(f"start_height: {start_height}")
+    curr_score = 1
 
-# right -> left
-for row in range(len(grid) - 1, -1, -1):
-  curr_highest = -1
-  for col in range(len(grid[row]) - 1, -1, -1):
-    if grid[row][col] > curr_highest:
-      curr_highest = grid[row][col]
-      seen[row][col] = 1
+    # print(start_height)
 
-# bottom -> top
-for col in range(len(grid[row]) - 1, -1, -1):
-  curr_highest = -1
-  for row in range(len(grid) - 1, -1, -1):
-    if grid[row][col] > curr_highest:
-      curr_highest = grid[row][col]
-      seen[row][col] = 1
+    # right
+    right = 0
+    for col in range(cell_x + 1, len(grid[cell_y])):
+      right += 1
+      if grid[cell_y][col] >= start_height:
+        break
 
-count = 0
-for row in seen:
-  for n in row:
-    if n == 1:
-      count += 1
-print(count)
+    # print(right)
+        
+    # down
+    down = 0
+    for row in range(cell_y + 1, len(grid)):
+      down += 1
+      if grid[row][cell_x] >= start_height:
+        break
+
+    # print(down)
+
+    # left
+    left = 0
+    for col in range(cell_x - 1, -1, -1):
+      left += 1
+      if grid[cell_y][col] >= start_height:
+        break
+    
+    # print(left)
+
+    # up
+    up = 0
+    for row in range(cell_y - 1, -1, -1):
+      up += 1
+      if grid[row][cell_x] >= start_height:
+        break
+    
+    # print(up)
+
+    curr_score = right * down * left * up
+    # print(curr_score)
+
+    max_score = max(max_score, curr_score)
+  
+print(max_score)
