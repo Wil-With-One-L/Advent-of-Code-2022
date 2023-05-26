@@ -16,7 +16,7 @@ def makeAlphaDict():
     i += 1
   
   d['S'] = 0
-  d['E'] = 26
+  d['E'] = 25
 
   return d
 
@@ -135,17 +135,18 @@ img = np.zeros((40,80,3), np.uint8)
 # blank_image[:,0:81//2] = (255,0,0)      # (B, G, R)
 # blank_image[:,81//2:81] = (0,255,0)
 
-# big = 360
-# for y in range(0, 40):
-#   for x in range(0, 80):
-#     if distance.__contains__((y, x)):
-#       color = distance[(y,x)] / big * 255
-#     img[y,x] = (color, color, color) 
-big = 27
+big = 360
 for y in range(0, 40):
   for x in range(0, 80):
-    color = elev_grid[y][x] / big * 255
+    if distance.__contains__((y, x)):
+      color = distance[(y,x)] / big * 255
     img[y,x] = (color, color, color) 
+
+# big = 27
+# for y in range(0, 40):
+#   for x in range(0, 80):
+#     color = elev_grid[y][x] / big * 255
+#     img[y,x] = (color, color, color) 
 # ===================================
 
 curr = end
