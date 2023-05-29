@@ -7,11 +7,21 @@ def cleanInput(filename):
 
 def getCells(start,end):
   cells = set()
-  if start[1] == end[1]:
-    for x in range(int(start[0]), int(end[0])):
+
+  # print(end)
+
+  if int(start[0]) < int(end[0]):
+    for x in range(int(start[0]), int(end[0]) + 1):
       cells.add((x, int(start[1])))
   else:
-    for y in range(int(start[1]), int(end[1])):
+    for x in range(int(start[0]), int(end[0]) - 1, -1):
+      cells.add((x, int(start[1])))
+  
+  if int(start[1]) < int(end[1]):
+    for y in range(int(start[1]), int(end[1]) + 1):
+      cells.add((int(start[0]), y))
+  else:
+    for y in range(int(start[1]), int(end[1]) - 1, -1):
       cells.add((int(start[0]), y))
   print(cells)
   return cells
@@ -99,7 +109,6 @@ while sand[0] < 165:
     sand = (y + 1, x + 1)
   grid[y][x] = 'X'
 
-
 # ===========================
 
 file = open('output.txt', 'w')
@@ -113,3 +122,5 @@ for row in grid:
 # ===========================
 
 # 411 too low
+# 703 too low
+# 707 incorrect
