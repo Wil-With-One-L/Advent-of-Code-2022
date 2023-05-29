@@ -40,16 +40,18 @@ def makeGrid(stone):
   grid = []
   for r in range(0, 200):
     row = []
-    for c in range(0, 600):
-      if (c, r) == (500, 0):
-        row.append('o')
-        continue
+    for c in range(0, 1000):
+      # if (c, r) == (500, 0):
+      #   row.append('o')
+      #   continue
       if (c, r) in stone:
         row.append('#')
       else:
         row.append('.')
     grid.append(row.copy())
   return grid
+
+
 
 # ============================
 
@@ -70,9 +72,13 @@ stone = makeStone(lines)
 
 grid = makeGrid(stone)
 
+for i in range(0, 1000):
+  grid[162][i] = '#'
+
 # ===========================
 
-for i in range(0, 1000):
+for i in range(0, 24589):
+  # print(i)
   sand = (0, 500)
   
   while sand[0] < 165:
@@ -90,24 +96,24 @@ for i in range(0, 1000):
       grid[y][x] = 'o'
       break
   
-  if sand[0] > 163:
+  if grid[0][500] == 'o':
     print(i)
     break
 
 # ===========================
 
-sand = (0, 500)
-while sand[0] < 165:
-  y = sand[0]
-  x = sand[1]
+# sand = (0, 500)
+# while sand[0] < 165:
+#   y = sand[0]
+#   x = sand[1]
 
-  if grid[y + 1][x] == '.':
-    sand = (y + 1, x)
-  elif grid[y + 1][x - 1] == '.':
-    sand = (y + 1, x - 1)
-  elif grid[y + 1][x + 1] == '.':
-    sand = (y + 1, x + 1)
-  grid[y][x] = 'X'
+#   if grid[y + 1][x] == '.':
+#     sand = (y + 1, x)
+#   elif grid[y + 1][x - 1] == '.':
+#     sand = (y + 1, x - 1)
+#   elif grid[y + 1][x + 1] == '.':
+#     sand = (y + 1, x + 1)
+#   grid[y][x] = 'X'
 
 # ===========================
 
@@ -121,6 +127,5 @@ for row in grid:
 
 # ===========================
 
-# 411 too low
-# 703 too low
-# 707 incorrect
+# 24588 too low
+# it was 24589 lol
