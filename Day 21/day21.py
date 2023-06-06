@@ -17,7 +17,7 @@ def makeDict(lines):
   for line in lines:
     if len(line) == 2:
       d[line[0]] = int(line[1])
-      print(d[line[0]])
+      # print(d[line[0]])
 
   while len(d) < len(lines):
     for line in lines:
@@ -41,6 +41,33 @@ def makeDict(lines):
 
 lines = cleanInput('Day 21/input.txt')
 
-d = makeDict(lines)
+root_idx = 1534
+humn_idx = 1602
+i = 3592056845000
 
-print(int(d['root']))
+# root_idx = 0
+# humn_idx = 7
+# i = 0
+
+while True:
+  d = makeDict(lines)
+  root_line = lines[root_idx]
+  lines[humn_idx][1] = i
+
+  if d[root_line[1]] == d[root_line[3]]:
+    print('===========')
+    print(i)
+    print(d[root_line[1]], d[root_line[3]])
+    print(d[root_line[1]] - d[root_line[3]])
+    break
+  
+  print('===========')
+  print(i)
+  print(d[root_line[1]], d[root_line[3]])
+  print(d[root_line[1]] - d[root_line[3]])
+
+  d.clear()
+
+  i += 1
+
+# 3592056845087 too high
